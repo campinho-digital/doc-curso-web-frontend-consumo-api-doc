@@ -36,6 +36,7 @@ Será nencessário um *POST* usando as seguintes credenciais para conseguir a su
 
 ~~~json
 https://ecom-back-strapi.onrender.com/api/auth/local
+
 ~~~
 
 
