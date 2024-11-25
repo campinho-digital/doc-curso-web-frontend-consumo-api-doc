@@ -1,3 +1,24 @@
+## O que é uma API?
+
+Uma API (Application Programming Interface) é um conjunto de definições e protocolos que permitem que diferentes sistemas se comuniquem. No contexto de aplicações web, uma API geralmente expõe endpoints que permitem que desenvolvedores interajam com um servidor para realizar ações como obter dados, enviar informações, atualizar registros, ou deletar recursos. A API utiliza formatos padronizados, como JSON, para que os dados sejam facilmente compreendidos.
+
+### O que é JSON?
+
+JSON (JavaScript Object Notation) é um formato de dados leve, fácil de ler e escrever, amplamente utilizado para troca de informações entre cliente e servidor. É baseado na sintaxe de objetos do JavaScript, mas pode ser usado em praticamente qualquer linguagem de programação. No JSON, os dados são organizados em pares de chave-valor:
+
+~~~json
+{
+  "id": 1,
+  "name": "Produto A",
+  "price": 29.99,
+  "inStock": true
+}
+
+~~~
+
+- Chave (key): Nome que identifica o dado. Ex: "name", "price".
+- Valor (value): O dado correspondente. Ex: "Produto A", 29.99.
+
 
 ## 📡 Testando a Api no Postman:
 
@@ -57,6 +78,12 @@ Authorization: Bearer SUACHAVE
 <img width="1029" alt="Captura de Tela 2024-11-04 às 13 09 02" src="https://github.com/user-attachments/assets/e447f9ce-f942-457b-a56d-171d641f010c">
 
 
+
+Caso nao consiga gerar use a key abaixo: 
+~~~javascript
+Api token reserva: 53ab0c2f8f03fc339ca7963fba5534433c4ee17136fe86cf7e0884b0891d3c6e27ee8c2b16ed0376f656306b6bb4a4f643ad6d344079cd8008a0fc071bb5a6c2ebf3bd51a93228c57983e12c26591b7e0e5b7bd42ec1b82506f49332871fde6370d4ecbe07bdc62cafa1555dec265adec77eb1affc29e4c854b2d915c228300b
+~~~
+
 ## Endpoints Disponíveis 📑
 
 ### Products (Produtos):
@@ -66,130 +93,45 @@ Listar todos os produtos: GET /products
 Detalhes de um produto específico: GET /products/:id
 ~~~
 
-Caso nao consiga gerar use a key abaixo: 
+
+### Movies (Filmes):
+
 ~~~javascript
-Api token reserva: 53ab0c2f8f03fc339ca7963fba5534433c4ee17136fe86cf7e0884b0891d3c6e27ee8c2b16ed0376f656306b6bb4a4f643ad6d344079cd8008a0fc071bb5a6c2ebf3bd51a93228c57983e12c26591b7e0e5b7bd42ec1b82506f49332871fde6370d4ecbe07bdc62cafa1555dec265adec77eb1affc29e4c854b2d915c228300b
+Listar todos os produtos: GET /movies
+Detalhes de um produto específico: GET /movies/:id
 ~~~
 
 
-
-## 📡 Consumindo a API com JS:
-
-Este guia mostra como consumir uma API RESTful com JavaScript, utilizando fetch() para fazer requisições e manipular o DOM. O exemplo foca em consumir dados de uma API Strapi e exibi-los em uma página web.
-
-### O que é JSON?
-JSON (JavaScript Object Notation) é um formato de dados leve e fácil de ler e escrever, amplamente utilizado para trocar informações entre cliente e servidor. No JavaScript, você pode transformar a resposta JSON em um objeto utilizável com o método `.json()`.
-
-1. Defina a URL da API e o Token:
-
-Comece definindo a URL da API que você deseja consumir e o token de autorização que será necessário nas requisições.
+### Animes:
 
 ~~~javascript
-const apiUrl = 'https://ecom-back-strapi.onrender.com/api/products';
-const token = 'Bearer SEU_TOKEN_AQUI'; // Insira seu token aqui
+Listar todos os animes: GET /animes
+Detalhes de um anime específico: GET /animes/:id
 ~~~
 
-2. Crie uma Função para Configurar os Cabeçalhos:
 
-Crie uma função que retorna os cabeçalhos necessários para a requisição, incluindo o token de autorização.
-~~~javascript
-function configurarCabecalhos() {
-    return {
-        'Authorization': token,
-        'Content-Type': 'application/json'
-    };
-}
-~~~
-
-3. Faça a Requisição à API:
-
-Use a função fetch para fazer uma requisição GET à API dentro de uma função assíncrona. Verifique a resposta e trate os erros adequadamente.
+### Livros:
 
 ~~~javascript
-async function buscarProdutos() {
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'GET',
-            headers: configurarCabecalhos()
-        });
-
-        if (!response.ok) {
-            throw new Error('Erro na resposta da API: ' + response.status);
-        }
-
-        const data = await response.json();
-        return data.data; // Retorna os produtos
-    } catch (error) {
-        console.error('Erro ao buscar dados da API:', error);
-        return null; // Em caso de erro
-    }
-}
+Listar todos os livros: GET /books
+Detalhes de um livro específico: GET /books/:id
 ~~~
 
-4. Exiba os Produtos:
 
-Crie uma função que aceita os produtos como parâmetro e cria elementos HTML para cada um deles, exibindo as informações na página.
+### Futebol:
 
 ~~~javascript
-function exibirProdutos(produtos) {
-    const produtosContainer = document.getElementById('produtos');
-    produtosContainer.innerHTML = ''; // Limpa o container antes de adicionar novos produtos
-
-    produtos.forEach(produto => {
-        // Crie um elemento de produto
-        const produtoDiv = document.createElement('div');
-        produtoDiv.classList.add('produto');
-
-        // Adicione a imagem do produto
-        const imagem = document.createElement('img');
-        imagem.src = produto.imagens[0]; // Usa a primeira imagem
-        imagem.alt = produto.nome;
-        imagem.classList.add('produto-imagem');
-
-        // Adicione o nome e preço do produto
-        const nome = document.createElement('h2');
-        nome.textContent = produto.nome;
-
-        const preco = document.createElement('p');
-        preco.textContent = `Preço: R$ ${produto.preco.toFixed(2)}`;
-
-        // Adicione um botão de compra
-        const botaoComprar = document.createElement('button');
-        botaoComprar.textContent = 'Comprar';
-        botaoComprar.onclick = () => {
-            // Aqui você pode adicionar lógica para o botão de compra
-            alert(`Você comprou: ${produto.nome}`);
-        };
-
-        // Adicione os elementos ao container do produto
-        produtoDiv.appendChild(imagem);
-        produtoDiv.appendChild(nome);
-        produtoDiv.appendChild(preco);
-        produtoDiv.appendChild(botaoComprar);
-        produtosContainer.appendChild(produtoDiv);
-    });
-}
-
+Listar todos os times: GET /futebol
+Detalhes de um time específico: GET /futebol/:id
 ~~~
 
-5. Função Principal para Executar o Fluxo:
-
-Por fim, crie uma função principal que chama as funções de buscar produtos e exibir produtos.
+### Games:
 
 ~~~javascript
-async function iniciarApp() {
-    const produtos = await buscarProdutos();
-    if (produtos) {
-        exibirProdutos(produtos);
-    } else {
-        console.error('Nenhum produto encontrado.');
-    }
-}
-
-// Chame a função principal ao carregar a página
-window.onload = iniciarApp;
-
+Listar todos os jogos: GET /games
+Detalhes de um jogo específico: GET /games/:id
 ~~~
+
 
 ## **Boa sorte e bom código!** 🚀📘
 
