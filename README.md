@@ -122,8 +122,8 @@ Detalhes de um livro específico: GET /books/:id
 ### Futebol:
 
 ~~~javascript
-Listar todos os times: GET /futebol
-Detalhes de um time específico: GET /futebol/:id
+Listar todos os times: GET /futebols
+Detalhes de um time específico: GET /futebols/:id
 ~~~
 
 ### Games:
