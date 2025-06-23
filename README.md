@@ -95,44 +95,5 @@ Detalhes de um produto específico: GET /products/:id
 ~~~
 
 
-### Movies (Filmes):
-
-~~~javascript
-Listar todos os produtos: GET /movies
-Detalhes de um produto específico: GET /movies/:id
-~~~
-
-
-### Animes:
-
-~~~javascript
-Listar todos os animes: GET /animes
-Detalhes de um anime específico: GET /animes/:id
-~~~
-
-
-### Livros:
-
-~~~javascript
-Listar todos os livros: GET /books
-Detalhes de um livro específico: GET /books/:id
-~~~
-
-
-### Futebol:
-
-~~~javascript
-Listar todos os times: GET /futebols
-Detalhes de um time específico: GET /futebols/:id
-~~~
-
-### Games:
-
-~~~javascript
-Listar todos os jogos: GET /games
-Detalhes de um jogo específico: GET /games/:id
-~~~
-
-
 ## **Boa sorte e bom código!** 🚀📘
 
